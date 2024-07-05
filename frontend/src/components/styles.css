@@ -1,0 +1,27 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+/* styles.css */
+
+.chatbox {
+  transition: all 0.3s ease;
+}
+
+.chatbox:hover {
+  transform: scale(1.02);
+}
+
+.chatbox p,
+.chatbox span {
+  font-size: 1.1em; /* Increase font size */
+  line-height: 1.5; /* Improve line spacing */
+  text-align: center; /* Center text for better readability */
+}
+body {
+  background-color: #1A202C; /* Dark background color */
+  color: white; /* Ensure text is readable on dark background */
+}
+

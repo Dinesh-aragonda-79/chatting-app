@@ -1,0 +1,15 @@
+/* index.css */
+body {
+  background-color: #1A202C; /* Dark background color */
+  color: white; /* White text color */
+}
+
+input, textarea, select, button {
+  background-color: #2D3748; /* Slightly lighter dark background for form elements */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+}
+
+input::placeholder, textarea::placeholder {
+  color: #A0AEC0; /* Lighter gray for placeholders */
+}
