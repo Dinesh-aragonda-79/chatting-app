@@ -13,18 +13,18 @@ const Signup = () => {
   const toast = useToast();
   const history = useHistory();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [confirmpassword, setConfirmpassword] = useState("");
-  const [password, setPassword] = useState("");
-  const [pic, setPic] = useState("");
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [confirmpassword, setConfirmpassword] = useState();
+  const [password, setPassword] = useState();
+  const [pic, setPic] = useState();
   const [picLoading, setPicLoading] = useState(false);
 
   const submitHandler = async () => {
     setPicLoading(true);
     if (!name || !email || !password || !confirmpassword) {
       toast({
-        title: "Please fill all the fields",
+        title: "Please Fill all the Fields",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -35,15 +35,15 @@ const Signup = () => {
     }
     if (password !== confirmpassword) {
       toast({
-        title: "Passwords do not match",
+        title: "Passwords Do Not Match",
         status: "warning",
         duration: 5000,
         isClosable: true,
         position: "bottom",
       });
-      setPicLoading(false);
       return;
     }
+    console.log(name, email, password, pic);
     try {
       const config = {
         headers: {
@@ -52,11 +52,17 @@ const Signup = () => {
       };
       const { data } = await axios.post(
         "/api/user",
-        { name, email, password, pic },
+        {
+          name,
+          email,
+          password,
+          pic,
+        },
         config
       );
+      console.log(data);
       toast({
-        title: "Registration successful",
+        title: "Registration Successful",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -67,7 +73,7 @@ const Signup = () => {
       history.push("/chats");
     } catch (error) {
       toast({
-        title: "Error occurred!",
+        title: "Error Occurred!",
         description: error.response.data.message,
         status: "error",
         duration: 5000,
@@ -82,7 +88,37 @@ const Signup = () => {
     setPicLoading(true);
     if (pics === undefined) {
       toast({
-        title: "Please select an image!",
+        title: "Please Select an Image!",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+    console.log(pics);
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "mingle");
+      data.append("cloud_name", "dinesharagonda");
+      fetch("https://api.cloudinary.com/v1_1/dinesharagonda/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          console.log(data.url.toString());
+          setPicLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setPicLoading(false);
+        });
+    } else {
+      toast({
+        title: "Please Select an Image!",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -90,33 +126,6 @@ const Signup = () => {
       });
       setPicLoading(false);
       return;
-    }
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      const data = new FormData();
-      data.append("file", pics);
-      data.append("upload_preset", "chat-app");
-      data.append("cloud_name", "your-cloudinary-cloud-name");
-      fetch("https://api.cloudinary.com/v1_1/your-cloudinary-cloud-name/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setPic(data.url.toString());
-          setPicLoading(false);
-        })
-        .catch((err) => {
-          setPicLoading(false);
-        });
-    } else {
-      toast({
-        title: "Please select an image!",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setPicLoading(false);
     }
   };
 
