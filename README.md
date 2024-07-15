@@ -32,10 +32,10 @@ This project is a full-stack chatting application built using the MERN stack: Mo
 ![Main Page](screenshots/main%20page.png)
 
 ### 🔑 Login Page
-![Login Page](screenshots/login.png)
+![Login Page](screenshots/login.PNG)
 
 ### 📝 Signup Page
-![Signup Page](screenshots/signup.png)
+![Signup Page](screenshots/signup.PNG)
 
 ### 🗂️ Group Chat
 ![Group Chat](screenshots/group%20chat.png)
