@@ -59,4 +59,4 @@ This project is a full-stack chatting application built using the MERN stack: Mo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/mern-chatting-app.git
+   git clone https://github.com/Dinesh-aragonda-79/mern-chatting-app.git
